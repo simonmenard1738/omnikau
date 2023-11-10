@@ -24,3 +24,15 @@ header a{
     margin-top: 10px;
     text-align: right;
 }
+
+#brandName{
+    color: white;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: 'Michroma', sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%; /* 36px */
+    letter-spacing: -0.36px;
+    padding-left:20px;
+}

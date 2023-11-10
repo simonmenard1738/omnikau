@@ -10,7 +10,7 @@ include_once 'Models/User.php';
             if($action=='edit' && $id !== ""){
                 $user = new User($id);
                 $data = ['user' => $user];
-                $this->render($action, $data);
+                $this->render('edit', $data);
             }else if($action=='update'){
                 $user = new User($id);
 
@@ -38,6 +38,8 @@ include_once 'Models/User.php';
                 } else {
                     echo "Failed to delete user.";
                 }
+            }else if($action == 'login'){
+                $this->render($action);
             }else{
                 echo "User not found!";
             }
@@ -51,6 +53,8 @@ include_once 'Models/User.php';
                 } else {
                     echo "Invalid user data";
                 }
+            }else if($action == 'login'){
+                include "Views/User/$action.php";
             } else {
                 if (!empty($data)) {
                     extract($data);
