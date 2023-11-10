@@ -1,0 +1,26 @@
+#postingGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#posting{
+    margin: 5px;
+    border: 1px solid black;
+    width: 200px;
+}
+
+header{
+    display: grid;
+    grid-template-columns: 70% 15% 15%;
+    vertical-align: middle;
+    margin-bottom: 50px;
+}
+
+header h1{
+    margin: 0;
+}
+
+header a{
+    margin-top: 10px;
+    text-align: right;
+}
