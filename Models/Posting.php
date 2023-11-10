@@ -40,6 +40,8 @@
                 $sql = $sql . " ORDER BY $sortCondition";
             } 
 
+            var_dump($sql);
+
             $result = $conn->query($sql);
 
             while($row = ($result->fetch_assoc())){

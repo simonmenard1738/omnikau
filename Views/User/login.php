@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="userretrieve.php">
+    <form action="?c=user&a=getuser" method='post'>
         <input placeholder="username" type="text" name="username">
         <input placeholder="password" type="text" name="password">
         <button>Log In</button>
