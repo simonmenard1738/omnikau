@@ -9,7 +9,7 @@
 <body>
     <form action="userretrieve.php">
         <input placeholder="username" type="text" name="username">
-        <input placeholder="password" type="text" name="password">
+        <input placeholder="password" type="password" name="password">
         <button>Log In</button>
     </form>
 </body>

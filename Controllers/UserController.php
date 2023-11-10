@@ -7,10 +7,18 @@ include_once 'Models/User.php';
             $action = isset($_GET['a']) ? $_GET['a'] : "none";
             $id = isset($_GET['id']) ? $_GET['id'] : "";
 
-            if($action=='edit' && $id !== ""){
+
+            if($action == 'login'){
+                $this->render($action);
+
+            }else if($action=='register'){
+                $this->render('register');
+
+            }else if($action=='edit' && $id !== ""){
                 $user = new User($id);
                 $data = ['user' => $user];
                 $this->render('edit', $data);
+                
             }else if($action=='update'){
                 $user = new User($id);
 
@@ -38,8 +46,6 @@ include_once 'Models/User.php';
                 } else {
                     echo "Failed to delete user.";
                 }
-            }else if($action == 'login'){
-                $this->render($action);
             }else{
                 echo "User not found!";
             }

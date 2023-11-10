@@ -34,7 +34,7 @@
                 echo "<a href='?c=user&a=signout'>Sign out</a>";
             }else{
                 echo "<a href='?c=user&a=login'>log in</a>";
-                echo "<a href='?c=user&a=login'>register</a>";
+                echo "<a href='?c=user&a=register'>register</a>";
             }
         ?>
         

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 10, 2023 at 04:22 PM
+-- Generation Time: Nov 10, 2023 at 05:55 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -73,6 +73,7 @@ INSERT INTO `Permissons` (`permisson_id`, `permisson_desc`) VALUES
 
 CREATE TABLE `Postings` (
   `posting_id` int(11) NOT NULL,
+  `posting_title` varchar(64) NOT NULL,
   `description` varchar(64) NOT NULL,
   `price` int(10) NOT NULL,
   `seller_email` varchar(64) NOT NULL,
@@ -86,13 +87,13 @@ CREATE TABLE `Postings` (
 -- Dumping data for table `Postings`
 --
 
-INSERT INTO `Postings` (`posting_id`, `description`, `price`, `seller_email`, `date_posted`, `visits`, `is_sold`, `post_type`) VALUES
-(1, 'Cool book', 4, 'bob420@edu.vaniercollege.qc.ca', '2023-11-03', 2, '0', 'Product'),
-(2, 'working laptop', 300, 'mike12@edu.vaniercollege.qc.ca', '2023-11-04', 2, '0', 'Product'),
-(3, 'Cool guitar ', 200, 'bob420@edu.vaniercollege.qc.ca', '2023-11-04', 2, '0', 'Product'),
-(4, 'Guitar lessons', 15, 'bob420@edu.vaniercollege.qc.ca', '2023-11-04', 3, '0', 'Service'),
-(5, 'piano lessons ', 15, 'mike12@edu.vaniercollege.qc.ca', '2023-11-04', 2, '0', 'Service'),
-(6, 'math tutor', 10, 'mike12@edu.vaniercollege.qc.ca', '2023-11-04', 2, '0', 'Service');
+INSERT INTO `Postings` (`posting_id`, `posting_title`, `description`, `price`, `seller_email`, `date_posted`, `visits`, `is_sold`, `post_type`) VALUES
+(1, 'Dark Force Rising', 'Cool book', 4, 'bob420@edu.vaniercollege.qc.ca', '2023-11-03', 2, '0', 'Product'),
+(2, 'ASUS TUF Gaming F15 Gaming Laptop', 'working laptop', 300, 'mike12@edu.vaniercollege.qc.ca', '2023-11-04', 2, '0', 'Product'),
+(3, 'PYLE Beginner 36” Classical Acoustic Guitar', 'Cool guitar ', 200, 'bob420@edu.vaniercollege.qc.ca', '2023-11-04', 2, '0', 'Product'),
+(4, 'Guitar lessons', 'Guitar lessons', 15, 'bob420@edu.vaniercollege.qc.ca', '2023-11-04', 3, '0', 'Service'),
+(5, 'piano lessons', 'piano lessons ', 15, 'mike12@edu.vaniercollege.qc.ca', '2023-11-04', 2, '0', 'Service'),
+(6, 'math tutor', 'math tutor', 10, 'mike12@edu.vaniercollege.qc.ca', '2023-11-04', 2, '0', 'Service');
 
 -- --------------------------------------------------------
 
