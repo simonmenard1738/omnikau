@@ -21,7 +21,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : "";
             <div class='user'>
                 <h2>Personal Details</h2>
                 <label for='email'>Email:</label>
-                <input type='email' id='email' name='email' value='<?php echo $user->email; ?>' required>
+                <input type='email' id='email' name='email' value='<?php echo $user->email; ?>' >
 
                 <label for='username'>Username:</label>
                 <input type='text' id='username' name='username' value='<?php echo $user->username; ?>' required>

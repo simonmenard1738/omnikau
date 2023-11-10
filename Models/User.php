@@ -3,6 +3,7 @@
     class User{
         public String $email = "";
         public String $username = "";
+        public String $password = "";
         public String $school_name = "";
         public String $program_name = "";
         public int $avg_rating = 0;
@@ -12,7 +13,7 @@
             global $conn;
 
             if ($email != '-1') {
-                $sql = "SELECT * FROM user WHERE email = ?";
+                $sql = "SELECT * FROM User WHERE email = ?";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("s", $email);
                 $stmt->execute();
