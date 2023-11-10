@@ -8,13 +8,16 @@
         public int $avg_rating = 0;
         public bool $active = true;
 
-        function __construct($email = "-1"){
-            if($email!='-1'){
-                global $conn;
-                //echo $email;
-                $sql = "SELECT * FROM user WHERE email=$email";
-                $res = $conn->query($sql);
-                $row = $res->fetch_assoc();
+        function __construct($email = "-1") {
+            global $conn;
+
+            if ($email != '-1') {
+                $sql = "SELECT * FROM user WHERE email = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("s", $email);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
 
                 $this->email = $email;
                 $this->username = $row['username'];
@@ -23,27 +26,33 @@
                 $this->program_name = $row['program_name'];
                 $this->avg_rating = $row['avg_rating'];
                 $this->active = $row['active'];
+                $stmt->close();
             }
         }
 
-        function update(){
+        function update($data, $id){
             global $conn;
             $sql = "UPDATE user SET email =$this->email,school_name=$this->school_name,program_name=$this->program_name
-            WHERE email = $this->email";
+            WHERE email = $id";
 
             $conn->query($sql);
 
             var_dump($conn->error);
         }
 
-        function updatePassword(){
+        function updatePassword($data){
             global $conn;
-            $sql = "UPDATE user SET password =$this->password
-            WHERE email = $this->email";
+            $sql = "UPDATE user SET password = ? WHERE email = ?";
+            $stmt = $conn->prepare($sql);
 
-            $conn->query($sql);
+            // Bind parameters
+            $stmt->bind_param("ss", $data['password'], $this->email);
+            $stmt->execute();
 
-            var_dump($conn->error);
+            if ($stmt->errno) {
+                var_dump($stmt->error);
+            }
+            $stmt->close();
         }
 
         function delete(){

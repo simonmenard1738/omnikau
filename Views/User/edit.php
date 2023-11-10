@@ -9,12 +9,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>omnikau</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
 </head>
 <body>
-    <form action="/?controller=user&action=update&id=<?php echo $user->id?>" method="POST">
-        <div id='postingGrid'>
-            <div class='posting'>
+<?php
+$id = isset($_GET['id']) ? $_GET['id'] : "";
+?>
+    <form action="./index.php?c=user&a=update&id=<?php echo $id?>" method="POST">
+        <div id='posting'>
+            <div class='user'>
                 <h2>Personal Details</h2>
                 <label for='email'>Email:</label>
                 <input type='email' id='email' name='email' value='<?php echo $user->email; ?>' required>
@@ -33,9 +37,9 @@
         </div>
     </form>
 
-    <form action="/?controller=user&action=updatePassword&id=<?php echo $user->id?>" method="POST">
-        <div id='postingGrid'>
-            <div class='posting'>
+    <form action="/?c=user&a=updatePassword&id=<?php echo $user->id?>" method="POST">
+        <div id='posting'>
+            <div class='user'>
                 <h2>Change Password</h2>
                 <label for='current_password'>Current password:</label>
                 <input type='password' id='current_password' name='current_password' required>
@@ -48,9 +52,9 @@
         </div>
     </form>
 
-    <form action="/?controller=user&action=delete&id=<?php echo $user->id?>" method="POST">
-        <div id='postingGrid'>
-            <div class='posting'>
+    <form action="/?c=user&a=delete&id=<?php echo $user->id?>" method="POST">
+        <div id='posting'>
+            <div class='user'>
                 <h2>Delete Account</h2>
                 <label for='password'>Current password:</label>
                 <input type='password' id='password' name='password' required>

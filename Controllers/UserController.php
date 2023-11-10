@@ -9,7 +9,8 @@ include_once 'Models/User.php';
 
             if($action=='edit' && $id !== ""){
                 $user = new User($id);
-                $this->render($action, $user);
+                $data = ['user' => $user];
+                $this->render($action, $data);
             }else if($action=='update'){
                 $user = new User($id);
 
@@ -20,7 +21,7 @@ include_once 'Models/User.php';
                     'school_name' => $_POST['school_name'],
                 ];
 
-                $user->update($data);
+                $user->update($data, $id );
 
             }else if($action=='updatePassword'){
                 $user = new User($id);
@@ -42,12 +43,19 @@ include_once 'Models/User.php';
             }
         }
 
-        function render($action, $data = []){
-            extract($data);
-            if($action=='edit'){
-                include "Views/Users/$action.php";
-            }else{
-                include "Views/Posting/$action.php";
+        function render($action, $data = []) {
+            if ($action == 'edit') {
+                if (isset($data['user']) && $data['user'] instanceof User) {
+                    $user = $data['user'];
+                    include "Views/User/$action.php";
+                } else {
+                    echo "Invalid user data";
+                }
+            } else {
+                if (!empty($data)) {
+                    extract($data);
+                }
+                include "Views/User/$action.php";
             }
         }
     }
