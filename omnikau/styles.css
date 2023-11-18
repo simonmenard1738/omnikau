@@ -1,0 +1,57 @@
+body{
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: 'Michroma', sans-serif;
+}
+
+#postingGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#posting{
+    background-color: white;
+    color: black;
+    margin: 5px;
+    border: 1px solid black;
+    width: 200px;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+header{
+    padding: 10px;
+    background-color: black;
+    color: white;
+    display: grid;
+    grid-template-columns: 55% 15% 15% 15%;
+    vertical-align: middle;
+    margin-bottom: 50px;
+}
+
+header #admin{
+    background-color: red;
+}
+
+header h1{
+    margin: 0;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%; /* 36px */
+    letter-spacing: -0.36px;
+}
+
+header a{
+    vertical-align: middle;
+    text-decoration: none;
+    color: white;
+    margin-top: 10px;
+    text-align: right;
+}
+
+@media screen and (max-width: 800px){
+    #postingGrid{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
