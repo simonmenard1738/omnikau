@@ -119,6 +119,30 @@
     
             return $list;
         } 
+
+        function getPostings(){
+            global $conn;
+            $list = array();
+            $sql = "SELECT * FROM posting WHERE seller_email = ".$this->seller_email;
+            $res = $conn->query($sql);
+
+            while($row = $res->fetch_assoc()){
+                $posting = new Posting();
+                $posting->posting_id = $row['posting_id'];
+                $posting->title = $row['title'];
+                $posting->description = $row['description'];
+                $posting->price = $row['price'];
+                $posting->seller_email = $row['seller_email'];
+                $posting->date_posted = $row['date_posted'];
+                $posting->visits = $row['visits'];
+                $posting->is_sold = $row['is_sold'];
+                $posting->post_type = $row['post_type'];
+
+                array_push($list, $posting);
+            }
+            
+            return $list;
+        }
     
     }
 ?>

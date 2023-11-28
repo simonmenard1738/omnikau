@@ -1,5 +1,13 @@
 <?php
-    include_once "Models/User.php";
+    $email = "-1";
+
+    if(isset($_SESSION['user']) && $_SESSION['user']!='-1'){
+        echo include_once('Models/User.php');
+        $user = $_SESSION['user'];
+        $email = $user->email;
+        var_dump($user);
+    }
+
     if(isset($_GET['where'])){
         $_SESSION['where'] = $_GET['where'];
     }
@@ -36,12 +44,7 @@
     </form>
     <div id='postingGrid'>
         <?php
-        $email = "-1";
-
-        if(isset($_SESSION['user']) && $_SESSION['user']!='-1'){
-            $user = $_SESSION['user'];
-            $email = $user->email;
-        }
+        
         printPostings($email, $data);
         
             

@@ -31,6 +31,7 @@
 
 <?php
     $data = $data[0];
+    $user = $data->getUser();
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +41,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+    <title><?php echo $data->title; ?></title>
 </head>
 <body>
     <?php include_once "header.php"; ?>
@@ -50,8 +51,6 @@
 
         <div id="fullposting">
             <?php
-                $user = $data->getUser();
-
                 echo "<h2>".$data->title."</h1>";
                 echo "<h3>".$data->post_type." from " . $user->username ."</h3>";
             ?>

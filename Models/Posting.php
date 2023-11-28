@@ -37,11 +37,20 @@
         static function listPostings($whereCondition=-1, $sortCondition=-1){
             global $conn;
             $list = array();
+
+            if(isset($_SESSION['user']) && $_SESSION['user']!='-1'){
+                $sql = $whereCondition!=-1 ? "SELECT * FROM Postings WHERE $whereCondition AND `seller_email` NOT LIKE ". $_SESSION['user']->email ."" : "SELECT * FROM Postings";
+                if($sortCondition!=-1){
+                    $sql = $sql . " ORDER BY $sortCondition";
+                } 
+            }else{
+                $sql = $whereCondition!=-1 ? "SELECT * FROM Postings WHERE $whereCondition " : "SELECT * FROM Postings";
+                if($sortCondition!=-1){
+                    $sql = $sql . " ORDER BY $sortCondition";
+                } 
+            }
             
-            $sql = $whereCondition!=-1 ? "SELECT * FROM Postings WHERE $whereCondition" : "SELECT * FROM Postings";
-            if($sortCondition!=-1){
-                $sql = $sql . " ORDER BY $sortCondition";
-            } 
+            
 
             var_dump($sql);
 
@@ -65,8 +74,8 @@
 
         function upload(){
             global $conn;
-            $sql = "INSERT INTO Postings (description,price,seller_email,is_sold,post_type) 
-            VALUES (\"$this->description\", $this->price, \"$this->seller_email\", 
+            $sql = "INSERT INTO Postings (title,description,price,seller_email,is_sold,post_type) 
+            VALUES (\"$this->title\",\"$this->description\", $this->price, \"$this->seller_email\", 
             $this->is_sold, \"$this->post_type\");";
             //var_dump($sql);
             $result = $conn->query($sql);

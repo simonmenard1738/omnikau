@@ -24,6 +24,7 @@
             ?>
         </select><br>
         <input type="text" name='program_name' placeholder="program_name"><br>
+        <h1>ADD PART TO PUT CONTACT INFO</h1>
         <button>Sign Up</button>
     </form>
 </body>
