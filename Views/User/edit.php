@@ -1,7 +1,6 @@
 
 <?php
     include_once "Controllers/UserController.php";
-    session_start();
 ?>
 
 <!DOCTYPE html>
