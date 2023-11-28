@@ -1,26 +1,114 @@
+body{
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: 'Michroma', sans-serif;
+}
+
 #postingGrid{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 #posting{
+    background-color: white;
+    color: black;
     margin: 5px;
     border: 1px solid black;
     width: 200px;
+    padding-left: 20px;
+    padding-right: 10px;
 }
 
+#fullposting{
+    background-color: white;
+    color: black;
+    margin: 5px;
+    border: 1px solid black;
+    width: 80%;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+#userdetails{
+    background-color: white;
+    color: black;
+    margin: 5px;
+    border: 1px solid black;
+    width: 80%;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+
 header{
+    padding: 10px;
+    background-color: black;
+    color: white;
     display: grid;
-    grid-template-columns: 70% 15% 15%;
+    grid-template-columns: 55% 15% 15% 15%;
     vertical-align: middle;
     margin-bottom: 50px;
 }
 
-header h1{
-    margin: 0;
+header #admin{
+    background-color: red;
 }
 
 header a{
-    margin-top: 10px;
-    text-align: right;
+    transition: all .2s ease-in;
+    color: white;
+}
+
+header h1{
+    margin: 0;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%; /* 36px */
+    letter-spacing: -0.36px;
+}
+
+header p{
+    vertical-align: middle;
+    
+    margin-top: 12px;
+    text-align: center;
+}
+
+header a:hover{
+    background-color: darkorange;
+    color: black;
+}
+
+a{
+    text-decoration: none;
+}
+
+#postingviewwrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+
+@media screen and (max-width: 800px){
+    #postingGrid{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    #postingviewwrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+    }
+}
+
+@media screen and (max-width: 500px){
+    #postingGrid{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
 }

@@ -8,12 +8,19 @@ include_once 'Models/Posting.php';
             $sort = isset($_GET['sort']) ? $_GET['sort'] : -1;
 
             if($action=='index'){
-                $postings = Posting::listPostings($where, $sort);
+                $postings = $sort!=-1 ? Posting::listPostings($where, $sort) : Posting::listPostings($where, 'visits DESC');
                 $this->render('index', $postings);
             }else if($action=='post'){
-                render($action);
-            }else{
-                $data = array(new Posting($id));
+                if($_SESSION['user']!=-1){
+                    $this->render($action);
+                }else{
+                    $_SESSION['alert'] = "You can't post without being logged in.";
+                    $this->render('index');
+                }  
+            }else if($action=='view'){
+                $posting = new Posting($id);
+                $posting->addVisit();
+                $data = array($posting);
                 $this->render($action, $data);
             }
         }

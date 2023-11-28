@@ -1,19 +1,17 @@
 <?php
     include_once "Models/User.php";
-    session_start();
-
     if(isset($_GET['where'])){
         $_SESSION['where'] = $_GET['where'];
     }
 
     //var_dump($_SESSION);
-    if(isset($_SESSION['alert']) && $_SESSION['alert']!=-1){
+    if(isset($_SESSION['alert']) && $_SESSION['alert']!='-1'){
         echo "<script language=\"javascript\">";
         echo "alert('";
-        echo $_SESSION['alert'];
+        echo str_replace("'", "", $_SESSION['alert']);
         echo "');";
         echo "</script>";
-        $_SESSION['alert']=-1;
+        $_SESSION['alert']='-1';
     }
 ?>
 
@@ -26,20 +24,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>omnikau</h1>
-        <?php
-            if(isset($_SESSION['user']) && $_SESSION['user']!="-1"){
-                echo "<a href='?c=user&a=edit'>".$_SESSION['user']->username."</a>";
-                echo "<a href='?c=user&a=signout'>Sign out</a>";
-            }else{
-                echo "<a href='?c=user&a=login'>log in</a>";
-                echo "<a href='?c=user&a=login'>register</a>";
-            }
-        ?>
-        
-        
-    </header>
+    <?php include_once "header.php"; ?>
     <form method='get' action='?c=posting&a=index>'>
 
         <select name='sort'>
@@ -62,11 +47,17 @@
             
         //var_dump($_SESSION['user']);
         function printPostings($email, $data){
+
+            $perms = isset($_SESSION['user']) && $_SESSION['user']!='-1' ? $_SESSION['user']->perms : "";
             foreach($data as $posting){
                 if($posting->seller_email!=$email){
+                    echo "<a href='?c=posting&a=view&i=$posting->posting_id'>";
                     echo "<div id='posting'>";
-                    echo "<h2>$posting->description</h2>";
-                    echo "<p>$posting->price</p>";
+                    echo "<h2>$posting->title</h2>";
+                    echo "<p>$$posting->price</p>";
+                    if(str_contains($perms, '3')){
+                        echo "<button>delete</button>";
+                    }
                     echo "</div>";
                 }
                 

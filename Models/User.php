@@ -1,5 +1,6 @@
 <?php
     include_once 'sqlconnection.php';
+    include_once 'Models/Contact.php';
     class User{
         public String $email = "";
         public String $username = "";
@@ -8,6 +9,8 @@
         public String $program_name = "";
         public int $avg_rating = 0;
         public bool $active = true;
+        public bool $admin = false;
+        public String $perms = "";
 
         function __construct($email = "-1") {
             global $conn;
@@ -38,7 +41,7 @@
 
             $conn->query($sql);
 
-            var_dump($conn->error);
+            //var_dump($conn->error);
         }
 
         function updatePassword($data){
@@ -51,7 +54,7 @@
             $stmt->execute();
 
             if ($stmt->errno) {
-                var_dump($stmt->error);
+                //var_dump($stmt->error);
             }
             $stmt->close();
         }
@@ -66,10 +69,56 @@
                 $stmt->close();
                 return true;
             } else {
-                var_dump($conn->error);
+                //var_dump($conn->error);
                 $stmt->close();
                 return false;
             }
         }
+
+        function upload(){
+            global $conn;
+            $sql = "INSERT INTO user (email, username, password, school_name, program_name) 
+            VALUES (\"$this->email\", \"$this->username\", \"$this->password\", 
+            \"$this->school_name\", \"$this->program_name\");";
+            try{
+                $result = $conn->query($sql);
+                $_SESSION['user'] = $this;
+            }catch(mysqli_sql_exception $e){
+                $_SESSION['alert'] = $e->getMessage();
+            }
+            
+            
+            //do error handling
+        }
+
+        function setPermissions(){
+            global $conn;
+            $sql = "SELECT * FROM Users_Groups WHERE email = \"$this->email\"";
+            //var_dump($sql);
+            $result = $conn->query($sql);
+
+            while($row = $result->fetch_assoc()){
+                $this->perms = $this->perms . ";" . $row['permission_id'];
+            }
+        }
+
+        function getContactInfo(){
+            global $conn;
+            $list = array();
+            $sql = "SELECT * FROM contact WHERE email = '$this->email'";
+            $res = $conn->query($sql);
+            
+            while($row = $res->fetch_assoc()){
+                $contact = new Contact();
+                $contact->contact_type = $row['contact_type'];
+                $contact->email = $row['email'];
+                $contact->contact_info = $row['contact_info'];
+    
+                array_push($list, $contact);
+            }
+    
+            return $list;
+        } 
+    
     }
 ?>

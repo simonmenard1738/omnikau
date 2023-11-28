@@ -1,6 +1,7 @@
 
 <?php
     include_once "Controllers/UserController.php";
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -14,14 +15,14 @@
 </head>
 <body>
 <?php
-$id = isset($_GET['id']) ? $_GET['id'] : "";
+ $user = $_SESSION['user'];
 ?>
-    <form action="./index.php?c=user&a=update&id=<?php echo $id?>" method="POST">
+<?php include_once "header.php"; ?>
+    <form action="./index.php?c=user&a=updater<?php echo $id?>" method="POST">
         <div id='posting'>
             <div class='user'>
                 <h2>Personal Details</h2>
-                <label for='email'>Email:</label>
-                <input type='email' id='email' name='email' value='<?php echo $user->email; ?>' >
+                <label for='email'>Email: <?php echo $user->email; ?></label>
 
                 <label for='username'>Username:</label>
                 <input type='text' id='username' name='username' value='<?php echo $user->username; ?>' required>
