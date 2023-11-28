@@ -18,6 +18,7 @@
  $user = $_SESSION['user'];
 ?>
 <?php include_once "header.php"; ?>
+    <h1>ACCOUNT</h1>
     <form action="./index.php?c=user&a=updater<?php echo $id?>" method="POST">
         <div id='posting'>
             <div class='user'>
@@ -63,6 +64,21 @@
             </div>
         </div>
     </form>
+    <h1>POSTINGS</h1>
+    <div id='postingGrid'>
+        <?php
+            $postings = $user->getPostings();
+            foreach($postings as $posting){
+                echo "<a href='?c=posting&a=view&i=$posting->posting_id'>";
+                echo "<div id='posting'>";
+                echo "<h2>$posting->title</h2>";
+                echo "<p>$$posting->price</p>";
+                echo "<button id='delete'>delete</button>";
+                echo "</div>";
+            }
+        ?>
+        <h1>ADD EDIT POSTING</h1>
+    </div>
 
 </body>
 </html>

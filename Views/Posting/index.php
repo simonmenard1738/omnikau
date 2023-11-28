@@ -59,7 +59,7 @@
                     echo "<h2>$posting->title</h2>";
                     echo "<p>$$posting->price</p>";
                     if(str_contains($perms, '3')){
-                        echo "<button>delete</button>";
+                        echo "<button id='delete'>delete</button>";
                     }
                     echo "</div>";
                 }

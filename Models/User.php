@@ -122,8 +122,9 @@
 
         function getPostings(){
             global $conn;
+            include_once "Models/Posting.php";
             $list = array();
-            $sql = "SELECT * FROM posting WHERE seller_email = ".$this->seller_email;
+            $sql = "SELECT * FROM postings WHERE seller_email = '".$this->email."'";
             $res = $conn->query($sql);
 
             while($row = $res->fetch_assoc()){
@@ -140,7 +141,7 @@
 
                 array_push($list, $posting);
             }
-            
+
             return $list;
         }
     

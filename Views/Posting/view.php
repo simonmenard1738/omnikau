@@ -63,7 +63,7 @@
         <div id="userdetails">
 
             <p><?php
-                echo "User rating: " . $user->avg_rating . "/5";
+                echo "User rating: " . $user->avg_rating . "/5 ADD METHOD TO DO STARS";
             ?><p>
 
             <p>Contact at</p>
@@ -77,6 +77,7 @@
                     }
                 ?>
             </ul>
+            <a href=<?php echo "?c=posting&a=buy&i=$data->posting_id"; ?>>purchase now</button>
         </div>
 
     </div>
