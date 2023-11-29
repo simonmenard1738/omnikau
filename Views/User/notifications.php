@@ -8,7 +8,12 @@
 <body>
     <?php 
         include_once 'header.php'; 
-
+        echo "<div id='transaction_grid>'";
+        foreach($data as $transaction){
+            echo "<div id='transaction'>";
+            echo "<h2>$transaction->title</h2>";
+        }
+        echo "</div>";
     ?>
     
 </body>

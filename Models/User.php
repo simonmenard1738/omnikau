@@ -161,7 +161,7 @@
 
         function getTransactions($unread = true){
             include_once 'Models/Transaction.php';
-            return getAllUserTransactions($this->email, $unread)
+            return Transaction::getUserTransactions($this->email, $unread);
         }
     
     }
