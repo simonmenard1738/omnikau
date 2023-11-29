@@ -17,7 +17,7 @@
 
             if($posting_id>-1){
                 global $conn;
-                $sql = "SELECT * FROM Postings WHERE posting_id=$posting_id";
+                $sql = "SELECT * FROM postings WHERE posting_id=$posting_id";
                 $result = $conn->query($sql);
                 $row = $result->fetch_assoc();
 
@@ -38,12 +38,12 @@
             global $conn;
             $list = array();
             if(isset($_SESSION['user']) && $_SESSION['user']!='-1'){
-                $sql = $whereCondition!=-1 ? "SELECT * FROM Postings WHERE $whereCondition AND is_sold = 0 AND `seller_email` NOT LIKE ". $_SESSION['user']->email ."" : "SELECT * FROM Postings WHERE is_sold = 0";
+                $sql = $whereCondition!=-1 ? "SELECT * FROM postings WHERE $whereCondition AND is_sold = 0 AND `seller_email` NOT LIKE ". $_SESSION['user']->email ."" : "SELECT * FROM postings WHERE is_sold = 0";
                 if($sortCondition!=-1){
                     $sql = $sql . " ORDER BY $sortCondition";
                 } 
             }else{
-                $sql = $whereCondition!=-1 ? "SELECT * FROM Postings WHERE $whereCondition AND is_sold = 0 " : "SELECT * FROM Postings WHERE is_sold = 0";
+                $sql = $whereCondition!=-1 ? "SELECT * FROM postings WHERE $whereCondition AND is_sold = 0 " : "SELECT * FROM postings WHERE is_sold = 0";
                 if($sortCondition!=-1){
                     $sql = $sql . " ORDER BY $sortCondition";
                 } 
@@ -68,7 +68,7 @@
 
         function upload(){
             global $conn;
-            $sql = "INSERT INTO Postings (title,description,price,seller_email,is_sold,post_type) 
+            $sql = "INSERT INTO postings (title,description,price,seller_email,is_sold,post_type) 
             VALUES (\"$this->title\",\"$this->description\", $this->price, \"$this->seller_email\", 
             $this->is_sold, \"$this->post_type\");";
             //var_dump($sql);
@@ -77,7 +77,7 @@
 
         function update(){
             global $conn;
-            $sql = "UPDATE Postings SET description='$this->description',price=$this->price,seller_email='$this->seller_email',
+            $sql = "UPDATE postings SET description='$this->description',price=$this->price,seller_email='$this->seller_email',
             date_posted='$this->date_posted',visits='$this->visits',is_sold='$this->is_sold',post_type='$this->post_type' 
             WHERE posting_id = '$this->posting_id'";
             $conn->query($sql);
@@ -85,7 +85,7 @@
 
         static function delete($id){
             global $conn;
-            $sql = "DELETE FROM Postings WHERE posting_id=$id";
+            $sql = "DELETE FROM postings WHERE posting_id=$id";
             echo $sql;
             $conn->query($sql);
         }

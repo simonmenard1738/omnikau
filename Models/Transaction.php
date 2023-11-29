@@ -42,6 +42,12 @@
             return $list;
         }
 
+        static function setRated($id){
+            global $conn;
+            $sql = $unread ? "UPDATE transactions SET rated = 1 WHERE transaction_id = $id";
+            $conn->query($sql);
+        }
+
         
     }
 ?>

@@ -16,7 +16,7 @@
             global $conn;
 
             if ($email != '-1') {
-                $sql = "SELECT * FROM User WHERE email = ?";
+                $sql = "SELECT * FROM user WHERE email = ?";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("s", $email);
                 $stmt->execute();
@@ -93,7 +93,7 @@
 
         function setPermissions(){
             global $conn;
-            $sql = "SELECT * FROM Users_Groups WHERE email = \"$this->email\"";
+            $sql = "SELECT * FROM users_groups WHERE email = \"$this->email\"";
             //var_dump($sql);
             $result = $conn->query($sql);
 
@@ -156,6 +156,7 @@
             global $conn;
             $sql = "SELECT * FROM transactions WHERE rated = 0 AND buyer_email = '$this->email'";
             $res = $conn->query($sql);
+            
             return $res->num_rows>0 ? true : false;
         }
 

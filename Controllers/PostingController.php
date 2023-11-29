@@ -3,13 +3,15 @@ include_once 'Models/Posting.php';
 include_once 'Models/Transaction.php';
     class PostingController{
         function route(){
+
+
             $action = isset($_GET['a']) ? $_GET['a'] : 'index';
             $id = isset($_GET['i']) ? $_GET['i'] : -1;
            
 
             if($action=='poster'){
                 $user = $_SESSION['user'];
-                //var_dump($user);
+                
                 $title = $_POST['title'];
                 $description = $_POST['description'];
                 $price = $_POST['price'];

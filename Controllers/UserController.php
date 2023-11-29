@@ -4,7 +4,7 @@ include_once 'Models/User.php';
         function route(){
             $controller = $_GET['c'];
             $action = isset($_GET['a']) ? $_GET['a'] : "none";
-            $id = isset($_GET['id']) ? $_GET['id'] : ""; 
+            $id = isset($_GET['i']) ? $_GET['i'] : ""; 
 
             if($action=="getuser"){
                 global $conn;

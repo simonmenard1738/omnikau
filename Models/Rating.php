@@ -6,7 +6,7 @@
         public int $transaction_id = -1;
         public int $stars = -1;
         
-        function __construct($rating_id, $transaction_id, $stars){
+        function __construct($transaction_id, $stars){
             $this->rating_id = $rating_id;
             $this->transaction_id = $transaction_id;
             $this->stars = $stars;
@@ -14,7 +14,7 @@
 
         function upload(){
             global $conn;
-            $sql = "INSERT INTO ratings (rating_id,transaction_id,stars) VALUES ($this->rating_id,$this->transaction_id,$this->stars)";
+            $sql = "INSERT INTO ratings (transaction_id,stars) VALUES ($this->transaction_id,$this->stars)";
             $conn->query($sql);
         }
     }
