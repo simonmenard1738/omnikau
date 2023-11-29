@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2023 at 04:11 PM
+-- Generation Time: Nov 28, 2023 at 10:59 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -86,16 +86,17 @@ CREATE TABLE `postings` (
 --
 
 INSERT INTO `postings` (`posting_id`, `description`, `price`, `seller_email`, `date_posted`, `visits`, `is_sold`, `post_type`, `title`) VALUES
-(1, 'An amazing awesome book that you will love', 4, 'bob420@edu.vaniercollege.qc.ca', '2023-11-03', 2, '0', 'Product', 'Cool book'),
-(2, 'working laptop', 300, 'mike12@edu.vaniercollege.qc.ca', '2023-11-04', 2, '0', 'Product', 'dell omnivox 3123'),
-(3, 'Cool guitar. I broke the bottom E string. My bad', 200, 'bob420@edu.vaniercollege.qc.ca', '2023-11-04', 2, '0', 'Product', 'Gibson Firebird'),
-(4, 'I can be trusted. I am big guitar man', 15, 'bob420@edu.vaniercollege.qc.ca', '2023-11-04', 3, '0', 'Service', 'Guitar lessons'),
-(5, 'I can be trusted. I am small piano man', 15, 'mike12@edu.vaniercollege.qc.ca', '2023-11-04', 2, '0', 'Service', 'piano lessons '),
-(6, 'you know the vibes og', 10, 'mike12@edu.vaniercollege.qc.ca', '2023-11-04', 2, '0', 'Service', 'math tutoring (cheap)'),
-(7, 'Mario 64 from 1996. Hell Yeah Mario Wahoo (I am currently in a f', 1000, 'mike12@edu.vaniercollege.qc.ca', '0000-00-00', 0, '0', 'Product', 'mario 64 original cartridege'),
-(8, 'pojemento jvnfj vjfnvjnfdjivdf vjfnjvnfdn nfdvijfdnji', 0, 'mike12@edu.vaniercollege.qc.ca', '0000-00-00', 0, '0', 'Product', 'game boy color'),
-(9, 'my father was a drinker... and a fiend..', 55, 'simon.menard@videotron.ca', '0000-00-00', 0, '0', 'Product', 'bicycle with 4 tires'),
-(13, 'i didnt like the game', 40, 'bob420@edu.vaniercollege.qc.ca', '2023-11-24', 0, '0', 'Product', 'red dead redemption 2');
+(1, 'An amazing awesome book that you will love', 4, 'bob420@edu.vaniercollege.qc.ca', '2023-11-03', 3, '0', 'Product', 'Cool book'),
+(2, 'working laptop', 300, 'mike12@edu.vaniercollege.qc.ca', '2023-11-04', 3, '0', 'Product', 'dell omnivox 3123'),
+(3, 'Cool guitar. I broke the bottom E string. My bad', 200, 'bob420@edu.vaniercollege.qc.ca', '2023-11-04', 9, '0', 'Product', 'Gibson Firebird'),
+(4, 'I can be trusted. I am big guitar man', 15, 'bob420@edu.vaniercollege.qc.ca', '2023-11-04', 10, '0', 'Service', 'Guitar lessons'),
+(6, 'you know the vibes og', 10, 'mike12@edu.vaniercollege.qc.ca', '2023-11-04', 10, '0', 'Service', 'math tutoring (cheap)'),
+(7, 'Mario 64 from 1996. Hell Yeah Mario Wahoo (I am currently in a f', 1000, 'mike12@edu.vaniercollege.qc.ca', '0000-00-00', 4, '0', 'Product', 'mario 64 original cartridege'),
+(8, 'pojemento jvnfj vjfnvjnfdjivdf vjfnjvnfdn nfdvijfdnji', 0, 'mike12@edu.vaniercollege.qc.ca', '0000-00-00', 5, '0', 'Product', 'game boy color'),
+(9, 'my father was a drinker... and a fiend..', 55, 'simon.menard@videotron.ca', '0000-00-00', 5, '0', 'Product', 'bicycle with 4 tires'),
+(13, 'i didnt like the game', 40, 'bob420@edu.vaniercollege.qc.ca', '2023-11-24', 1, '0', 'Product', 'red dead redemption 2'),
+(18, 'you know the vibes', 32, 'bob420@edu.vaniercollege.qc.ca', '2023-11-28', 2, '0', 'SERVICE', 'pyramid scheme'),
+(19, 'one banana. property of Maximillian', 48, 'bob420@edu.vaniercollege.qc.ca', '2023-11-28', 40, '0', 'PRODUCT', 'Banana');
 
 -- --------------------------------------------------------
 
@@ -133,7 +134,6 @@ CREATE TABLE `ratings` (
 
 INSERT INTO `ratings` (`rating_id`, `posting_id`, `stars`) VALUES
 (1, 6, 5),
-(2, 5, 4),
 (3, 4, 4);
 
 -- --------------------------------------------------------
@@ -195,7 +195,6 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`transactions_id`, `buyer_email`, `posting_id`) VALUES
-(1, 'bob420@edu.vaniercollege.qc.ca', 5),
 (2, 'bob420@edu.vaniercollege.qc.ca', 6),
 (3, 'mike12@edu.vaniercollege.qc.ca', 4);
 
@@ -338,7 +337,7 @@ ALTER TABLE `permissons`
 -- AUTO_INCREMENT for table `postings`
 --
 ALTER TABLE `postings`
-  MODIFY `posting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `posting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `ratings`
@@ -378,14 +377,14 @@ ALTER TABLE `contact`
 -- Constraints for table `postings`
 --
 ALTER TABLE `postings`
-  ADD CONSTRAINT `fk_Postings_Post_Type_post_type` FOREIGN KEY (`post_type`) REFERENCES `post_type` (`post_type`),
-  ADD CONSTRAINT `fk_Postings_Users_email` FOREIGN KEY (`seller_email`) REFERENCES `user` (`email`);
+  ADD CONSTRAINT `fk_Postings_Post_Type_post_type` FOREIGN KEY (`post_type`) REFERENCES `post_type` (`post_type`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_Postings_email` FOREIGN KEY (`seller_email`) REFERENCES `user` (`email`);
 
 --
 -- Constraints for table `ratings`
 --
 ALTER TABLE `ratings`
-  ADD CONSTRAINT `fk_Postings_Rating_posting_id` FOREIGN KEY (`posting_id`) REFERENCES `postings` (`posting_id`);
+  ADD CONSTRAINT `fk_Postings_Rating_posting_id` FOREIGN KEY (`posting_id`) REFERENCES `postings` (`posting_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `reports`
@@ -398,8 +397,8 @@ ALTER TABLE `reports`
 -- Constraints for table `transactions`
 --
 ALTER TABLE `transactions`
-  ADD CONSTRAINT `fk_Transactions_Postings_posting_id` FOREIGN KEY (`posting_id`) REFERENCES `postings` (`posting_id`),
-  ADD CONSTRAINT `fk_Transactions_Users_email` FOREIGN KEY (`buyer_email`) REFERENCES `user` (`email`);
+  ADD CONSTRAINT `fk_transaction_email` FOREIGN KEY (`buyer_email`) REFERENCES `user` (`email`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_transaction_posting_id` FOREIGN KEY (`posting_id`) REFERENCES `postings` (`posting_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `user`

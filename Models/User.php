@@ -144,6 +144,25 @@
 
             return $list;
         }
+
+        function getAvgRating(){
+            global $conn;
+            $sql = "SELECT stars FROM ratings WHERE posting_id = (
+                SELECT posting_id FROM posting WHERE seller_email = $this->seller_email
+            )";
+        }
+
+        function hasUnrated(){
+            global $conn;
+            $sql = "SELECT * FROM transactions WHERE rated = 0 AND buyer_email = '$this->email'";
+            $res = $conn->query($sql);
+            return $res->num_rows>0 ? true : false;
+        }
+
+        function getTransactions($unread = true){
+            include_once 'Models/Transaction.php';
+            return getAllUserTransactions($this->email, $unread)
+        }
     
     }
 ?>

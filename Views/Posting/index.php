@@ -2,10 +2,9 @@
     $email = "-1";
 
     if(isset($_SESSION['user']) && $_SESSION['user']!='-1'){
-        echo include_once('Models/User.php');
+        include_once('Models/User.php');
         $user = $_SESSION['user'];
         $email = $user->email;
-        var_dump($user);
     }
 
     if(isset($_GET['where'])){
@@ -54,14 +53,17 @@
             $perms = isset($_SESSION['user']) && $_SESSION['user']!='-1' ? $_SESSION['user']->perms : "";
             foreach($data as $posting){
                 if($posting->seller_email!=$email){
-                    echo "<a href='?c=posting&a=view&i=$posting->posting_id'>";
                     echo "<div id='posting'>";
+                    echo "<a href='?c=posting&a=view&i=$posting->posting_id'>";
                     echo "<h2>$posting->title</h2>";
                     echo "<p>$$posting->price</p>";
+                    echo "</a>";
                     if(str_contains($perms, '3')){
-                        echo "<button id='delete'>delete</button>";
+                        echo "<a id='delete' href='?c=posting&a=delete&i=";
+                        echo $posting->posting_id . "'>delete</a>";
                     }
                     echo "</div>";
+                    
                 }
                 
             }

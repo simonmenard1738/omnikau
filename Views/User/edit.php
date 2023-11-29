@@ -68,16 +68,19 @@
         <?php
             $postings = $user->getPostings();
             foreach($postings as $posting){
-                echo "<a href='?c=posting&a=view&i=$posting->posting_id'>";
+                
                 echo "<div id='posting'>";
+                echo "<a href='?c=posting&a=view&i=$posting->posting_id'>";
                 echo "<h2>$posting->title</h2>";
                 echo "<p>$$posting->price</p>";
-                echo "<button id='delete'>delete</button>";
+                echo '</a>';
+                echo "<a id='delete' href='?c=posting&a=delete&i=$posting->posting_id' >delete</a>";
                 echo "</div>";
             }
         ?>
         <h1>ADD EDIT POSTING</h1>
     </div>
+    <a href='?c=user&a=signout'><p>Sign out</p></a>
 
 </body>
 </html>

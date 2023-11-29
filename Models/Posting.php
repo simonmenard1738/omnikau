@@ -37,23 +37,17 @@
         static function listPostings($whereCondition=-1, $sortCondition=-1){
             global $conn;
             $list = array();
-
             if(isset($_SESSION['user']) && $_SESSION['user']!='-1'){
-                $sql = $whereCondition!=-1 ? "SELECT * FROM Postings WHERE $whereCondition AND `seller_email` NOT LIKE ". $_SESSION['user']->email ."" : "SELECT * FROM Postings";
+                $sql = $whereCondition!=-1 ? "SELECT * FROM Postings WHERE $whereCondition AND is_sold = 0 AND `seller_email` NOT LIKE ". $_SESSION['user']->email ."" : "SELECT * FROM Postings WHERE is_sold = 0";
                 if($sortCondition!=-1){
                     $sql = $sql . " ORDER BY $sortCondition";
                 } 
             }else{
-                $sql = $whereCondition!=-1 ? "SELECT * FROM Postings WHERE $whereCondition " : "SELECT * FROM Postings";
+                $sql = $whereCondition!=-1 ? "SELECT * FROM Postings WHERE $whereCondition AND is_sold = 0 " : "SELECT * FROM Postings WHERE is_sold = 0";
                 if($sortCondition!=-1){
                     $sql = $sql . " ORDER BY $sortCondition";
                 } 
             }
-            
-            
-
-            var_dump($sql);
-
             $result = $conn->query($sql);
 
             while($row = ($result->fetch_assoc())){
@@ -89,6 +83,13 @@
             $conn->query($sql);
         }
 
+        static function delete($id){
+            global $conn;
+            $sql = "DELETE FROM Postings WHERE posting_id=$id";
+            echo $sql;
+            $conn->query($sql);
+        }
+
         function addVisit(){
             $this->visits+=1;
             $this->update();
@@ -110,6 +111,12 @@
             $user->active = $row['active'];
         
             return $user;
+        }
+
+        static function sell($id){
+            global $conn;
+            $sql = "UPDATE postings SET is_sold = 1 WHERE posting_id='$id'";
+            $conn->query($sql);
         }
     }
 ?>

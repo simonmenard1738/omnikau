@@ -32,6 +32,13 @@ include_once 'Models/User.php';
                 $_SESSION['user'] = -1;
                 $_SESSION['where'] = -1;
                 header("Location: ?c=posting&a=index");
+            }else if($action=='notifications'){
+                if(isset($_SESSION['user'])&&$_SESSION['user']!='-1'){
+
+                }else{
+                    $_SESSION['alert'] = "Can't view notifications while not logged in.";
+                    $this->render('index');
+                }
             }else{
                 $this->render($action);
             }

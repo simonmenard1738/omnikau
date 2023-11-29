@@ -1,4 +1,7 @@
 body{
+    margin: 20px;
+    margin-top: 80px;
+    position: relative;
     font-feature-settings: 'clig' off, 'liga' off;
     font-family: 'Michroma', sans-serif;
 }
@@ -38,8 +41,14 @@ body{
     padding-right: 10px;
 }
 
+#headercontainer{
+    position: fixed;
+}
 
 header{
+    position: fixed;
+    top:0;
+    width: 100%;
     padding: 10px;
     background-color: black;
     color: white;
@@ -54,6 +63,7 @@ header #admin{
 }
 
 header a{
+    text-decoration: none;
     transition: all .2s ease-in;
     color: white;
 }
@@ -79,7 +89,17 @@ header a:hover{
     color: black;
 }
 
-a{
+header a:visited{
+    text-decoration: none;
+}
+
+div a{
+    color: black;
+    text-decoration: none;
+}
+
+div a:visited{
+    color: black;
     text-decoration: none;
 }
 

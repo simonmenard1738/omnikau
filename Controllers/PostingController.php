@@ -1,11 +1,11 @@
 <?php
 include_once 'Models/Posting.php';
+include_once 'Models/Transaction.php';
     class PostingController{
         function route(){
             $action = isset($_GET['a']) ? $_GET['a'] : 'index';
             $id = isset($_GET['i']) ? $_GET['i'] : -1;
-            $where = isset($_GET['where']) ? $_GET['where'] : -1;
-            $sort = isset($_GET['sort']) ? $_GET['sort'] : -1;
+           
 
             if($action=='poster'){
                 $user = $_SESSION['user'];
@@ -31,9 +31,7 @@ include_once 'Models/Posting.php';
                 $posting->upload();
                 header("Location: ?c=posting&a=index");
             }else if($action=='index'){
-                echo($where);
-                $postings = $sort!=-1 ? Posting::listPostings($where, $sort) : Posting::listPostings($where, 'visits DESC');
-                $this->render('index', $postings);
+                $this->goToIndex();
             }else if($action=='post'){
                 if(isset($_SESSION['user']) && $_SESSION['user']!='-1'){
                     $this->render($action);
@@ -46,7 +44,31 @@ include_once 'Models/Posting.php';
                 $posting->addVisit();
                 $data = array($posting);
                 $this->render($action, $data);
+            }else if($action=='delete'){
+                if($id!=-1){
+                    Posting::delete($id);
+                }else{
+                    $_SESSION['alert'] = "Deletion failed.";
+                }
+                $this->goToIndex();
+            }else if($action=='buy'){
+                if(isset($_SESSION['user']) && $_SESSION['user']!="-1"){
+                    $transaction = new Transaction($_SESSION['user']->email, $id, 0, true);
+                    Posting::sell($id);
+                    $this->render('purchased');
+                }else{
+                    $_SESSION['alert'] = "Can't purchase anything while not logged in.";
+                    $this->render('index');
+                }
+                
             }
+        }
+
+        function goToIndex(){
+            $where = isset($_GET['where']) ? $_GET['where'] : -1;
+            $sort = isset($_GET['sort']) ? $_GET['sort'] : -1;
+            $postings = $sort!=-1 ? Posting::listPostings($where, $sort) : Posting::listPostings($where, 'visits DESC');
+            $this->render('index', $postings);
         }
 
         function render($action, $data = []){

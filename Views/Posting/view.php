@@ -63,7 +63,18 @@
         <div id="userdetails">
 
             <p><?php
-                echo "User rating: " . $user->avg_rating . "/5 ADD METHOD TO DO STARS";
+                echo "User rating: ";
+                $stars = $user->avg_rating;
+                $blankstars = 5-$stars;
+                while($stars!=0){
+                    echo "★";
+                    $stars = $stars-1;
+                }
+                while($blankstars!=0){
+                    echo "☆";
+                    $blankstars = $blankstars-1;
+                }
+                echo " ($user->avg_rating/5)"
             ?><p>
 
             <p>Contact at</p>
@@ -77,7 +88,11 @@
                     }
                 ?>
             </ul>
-            <a href=<?php echo "?c=posting&a=buy&i=$data->posting_id"; ?>>purchase now</button>
+            <?php
+                if(isset($_SESSION['user'])&&$_SESSION['user']!="-1"){
+                    echo "<a href='?c=posting&a=buy&i=$data->posting_id'>purchase now</button>";
+                }
+            ?>
         </div>
 
     </div>
