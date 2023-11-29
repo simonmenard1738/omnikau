@@ -4,12 +4,14 @@
 
     class RatingController{
 
-        $controller = $_GET['c'];
-        $action = isset($_GET['a']) ? $_GET['a'] : "index";
-        $id = isset($_GET['i']) ? $_GET['i'] : "-1"; 
-        $stars = isset($_GET['s']) ? $_GET['s'] : "-1"; 
-
+        
         function route(){
+
+            $controller = $_GET['c'];
+            $action = isset($_GET['a']) ? $_GET['a'] : "index";
+            $id = isset($_GET['i']) ? $_GET['i'] : "-1"; 
+            $stars = isset($_GET['s']) ? $_GET['s'] : "-1"; 
+
             if($id!=-1&&$stars!=-1){
                 $rating = new Rating($id, $stars);
                 $rating->upload();
@@ -21,7 +23,7 @@
         }
 
         function render(){
-            header("Location: ?c=user&a=notifications");
+            header($_SESSION['user']->hasUnrated() ? "Location: ?c=user&a=notifications" : "Location: ?c=posting&a=index");
         }
     }
 ?>

@@ -147,9 +147,22 @@
 
         function getAvgRating(){
             global $conn;
-            $sql = "SELECT stars FROM ratings WHERE posting_id = (
-                SELECT posting_id FROM posting WHERE seller_email = $this->seller_email
+            $stars = 0;
+            $total = 0;
+            $sql = "SELECT stars FROM ratings WHERE transaction_id IN (
+                SELECT transaction_id FROM transactions WHERE posting_id IN (SELECT posting_id FROM postings WHERE seller_email = '$this->email')
             )";
+            $res = $conn->query($sql);
+            if($res->num_rows!=0){
+                while($row = $res->fetch_assoc()){
+                    $total = $total+1;
+                    $stars = $stars + $row['stars'];
+                }
+                return $stars/$total;
+            }else{
+                return false;
+            }
+            
         }
 
         function hasUnrated(){

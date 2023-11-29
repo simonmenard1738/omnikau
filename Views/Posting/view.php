@@ -64,17 +64,20 @@
 
             <p><?php
                 echo "User rating: ";
-                $stars = $user->avg_rating;
+                $stars = $user->getAvgRating();
                 $blankstars = 5-$stars;
-                while($stars!=0){
-                    echo "★";
-                    $stars = $stars-1;
+                if($stars){
+                    while($stars!=0){
+                        echo "★";
+                        $stars = $stars-1;
+                    }
+                    while($blankstars!=0){
+                        echo "☆";
+                        $blankstars = $blankstars-1;
+                    }
                 }
-                while($blankstars!=0){
-                    echo "☆";
-                    $blankstars = $blankstars-1;
-                }
-                echo " ($user->avg_rating/5)"
+                
+                echo $user->getAvgRating() ? " (".$user->getAvgRating()."/5)" : "No ratings yet";
             ?><p>
 
             <p>Contact at</p>

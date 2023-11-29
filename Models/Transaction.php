@@ -33,6 +33,7 @@
             while($row = $res->fetch_assoc()){
                 $transaction = new Transaction($row['buyer_email'], $row['posting_id'], $row['rated']);
                 $transaction->posting_id = $row['posting_id'];
+                $transaction->transaction_id = $row['transaction_id'];
                 $sql = "SELECT title FROM postings WHERE posting_id = $transaction->posting_id";
                 $subres = $conn->query($sql);
                 $posting = $subres->fetch_assoc();
@@ -44,7 +45,7 @@
 
         static function setRated($id){
             global $conn;
-            $sql = $unread ? "UPDATE transactions SET rated = 1 WHERE transaction_id = $id";
+            $sql = "UPDATE transactions SET rated = 1 WHERE transaction_id = $id";
             $conn->query($sql);
         }
 

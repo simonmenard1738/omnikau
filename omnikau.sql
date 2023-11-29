@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2023 at 10:59 PM
+-- Generation Time: Nov 29, 2023 at 10:24 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -86,17 +86,16 @@ CREATE TABLE `postings` (
 --
 
 INSERT INTO `postings` (`posting_id`, `description`, `price`, `seller_email`, `date_posted`, `visits`, `is_sold`, `post_type`, `title`) VALUES
-(1, 'An amazing awesome book that you will love', 4, 'bob420@edu.vaniercollege.qc.ca', '2023-11-03', 3, '0', 'Product', 'Cool book'),
-(2, 'working laptop', 300, 'mike12@edu.vaniercollege.qc.ca', '2023-11-04', 3, '0', 'Product', 'dell omnivox 3123'),
-(3, 'Cool guitar. I broke the bottom E string. My bad', 200, 'bob420@edu.vaniercollege.qc.ca', '2023-11-04', 9, '0', 'Product', 'Gibson Firebird'),
-(4, 'I can be trusted. I am big guitar man', 15, 'bob420@edu.vaniercollege.qc.ca', '2023-11-04', 10, '0', 'Service', 'Guitar lessons'),
-(6, 'you know the vibes og', 10, 'mike12@edu.vaniercollege.qc.ca', '2023-11-04', 10, '0', 'Service', 'math tutoring (cheap)'),
-(7, 'Mario 64 from 1996. Hell Yeah Mario Wahoo (I am currently in a f', 1000, 'mike12@edu.vaniercollege.qc.ca', '0000-00-00', 4, '0', 'Product', 'mario 64 original cartridege'),
-(8, 'pojemento jvnfj vjfnvjnfdjivdf vjfnjvnfdn nfdvijfdnji', 0, 'mike12@edu.vaniercollege.qc.ca', '0000-00-00', 5, '0', 'Product', 'game boy color'),
-(9, 'my father was a drinker... and a fiend..', 55, 'simon.menard@videotron.ca', '0000-00-00', 5, '0', 'Product', 'bicycle with 4 tires'),
-(13, 'i didnt like the game', 40, 'bob420@edu.vaniercollege.qc.ca', '2023-11-24', 1, '0', 'Product', 'red dead redemption 2'),
-(18, 'you know the vibes', 32, 'bob420@edu.vaniercollege.qc.ca', '2023-11-28', 2, '0', 'SERVICE', 'pyramid scheme'),
-(19, 'one banana. property of Maximillian', 48, 'bob420@edu.vaniercollege.qc.ca', '2023-11-28', 40, '0', 'PRODUCT', 'Banana');
+(2, 'working laptop', 300, 'mike12@edu.vaniercollege.qc.ca', '2023-11-04', 10, '1', 'Product', 'dell omnivox 3123'),
+(3, 'Cool guitar. I broke the bottom E string. My bad', 200, 'bob420@edu.vaniercollege.qc.ca', '2023-11-04', 13, '1', 'Product', 'Gibson Firebird'),
+(6, 'you know the vibes og', 10, 'mike12@edu.vaniercollege.qc.ca', '2023-11-04', 13, '1', 'Service', 'math tutoring (cheap)'),
+(8, 'pojemento jvnfj vjfnvjnfdjivdf vjfnjvnfdn nfdvijfdnji', 0, 'mike12@edu.vaniercollege.qc.ca', '0000-00-00', 15, '0', 'Product', 'game boy color'),
+(9, 'my father was a drinker... and a fiend..', 55, 'simon.menard@videotron.ca', '0000-00-00', 9, '1', 'Product', 'bicycle with 4 tires'),
+(13, 'i didnt like the game', 40, 'bob420@edu.vaniercollege.qc.ca', '2023-11-24', 10, '0', 'Product', 'red dead redemption 2'),
+(18, 'you know the vibes', 32, 'bob420@edu.vaniercollege.qc.ca', '2023-11-28', 8, '0', 'SERVICE', 'pyramid scheme'),
+(19, 'one banana. property of Maximillian', 48, 'bob420@edu.vaniercollege.qc.ca', '2023-11-28', 63, '0', 'PRODUCT', 'Banana'),
+(20, 'crack cocaine. lots of it.', 40, 'jimmy@jim.com', '2023-11-29', 1, '0', 'PRODUCT', 'crack'),
+(21, 'mm yummy ham burger wawaweewa', 20, 'jimmy@jim.com', '2023-11-29', 5, '0', 'PRODUCT', 'hamburger');
 
 -- --------------------------------------------------------
 
@@ -124,7 +123,7 @@ INSERT INTO `post_type` (`post_type`) VALUES
 
 CREATE TABLE `ratings` (
   `rating_id` int(11) NOT NULL,
-  `posting_id` int(11) NOT NULL,
+  `transaction_id` int(11) DEFAULT NULL,
   `stars` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -132,9 +131,15 @@ CREATE TABLE `ratings` (
 -- Dumping data for table `ratings`
 --
 
-INSERT INTO `ratings` (`rating_id`, `posting_id`, `stars`) VALUES
-(1, 6, 5),
-(3, 4, 4);
+INSERT INTO `ratings` (`rating_id`, `transaction_id`, `stars`) VALUES
+(0, NULL, 0),
+(3, NULL, 4),
+(4, 6, 3),
+(5, 6, 3),
+(7, 6, 3),
+(8, 6, 5),
+(11, 7, 4),
+(12, 9, 5);
 
 -- --------------------------------------------------------
 
@@ -185,18 +190,24 @@ INSERT INTO `school` (`school_name`, `email_template`, `loaction`) VALUES
 --
 
 CREATE TABLE `transactions` (
-  `transactions_id` int(11) NOT NULL,
+  `transaction_id` int(11) NOT NULL,
   `buyer_email` varchar(64) NOT NULL,
-  `posting_id` int(11) NOT NULL
+  `posting_id` int(11) NOT NULL,
+  `rated` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `transactions`
 --
 
-INSERT INTO `transactions` (`transactions_id`, `buyer_email`, `posting_id`) VALUES
-(2, 'bob420@edu.vaniercollege.qc.ca', 6),
-(3, 'mike12@edu.vaniercollege.qc.ca', 4);
+INSERT INTO `transactions` (`transaction_id`, `buyer_email`, `posting_id`, `rated`) VALUES
+(2, 'bob420@edu.vaniercollege.qc.ca', 6, 0),
+(4, 'bob420@edu.vaniercollege.qc.ca', 9, 0),
+(5, 'bob420@edu.vaniercollege.qc.ca', 9, 0),
+(6, 'bob420@edu.vaniercollege.qc.ca', 9, 1),
+(7, 'bob420@edu.vaniercollege.qc.ca', 6, 1),
+(8, 'bob420@edu.vaniercollege.qc.ca', 2, 0),
+(9, 'jimmy@jim.com', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -218,8 +229,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`email`, `username`, `password`, `school_name`, `program_name`, `active`) VALUES
-('2062055@edu.vaniercollege.qc.ca', 'sonic', '48ab1243dfc4a8c7b971e0f45b70a9d8', 'Vanier', 'Psychology', 0),
 ('bob420@edu.vaniercollege.qc.ca', 'bob', '7ea90972cc909f2117a228b33b0b3f00', 'Vanier', 'Computer Science', 1),
+('jimmy@jim.com', 'jimmy', 'c2fe677a63ffd5b7ffd8facbf327dad0', 'Dawson', 'Comp Sci', 0),
 ('john@gmail.com', 'johnny', 'e6d96502596d7e7887b76646c5f615d9', 'Dawson', 'car', 0),
 ('loser@edu.vaniercollege.qc.ca', 'loser', '9d6b18466e285e0ee7b5c30c1c91d4dc', 'Dawson', 'loser', 1),
 ('mike12@edu.vaniercollege.qc.ca', 'mike12', 'ff040a1ec0eb0f83451defb3ae2f068f', 'Vanier', 'Computer Science', 1),
@@ -283,7 +294,7 @@ ALTER TABLE `post_type`
 --
 ALTER TABLE `ratings`
   ADD PRIMARY KEY (`rating_id`),
-  ADD KEY `fk_Postings_Rating_posting_id` (`posting_id`);
+  ADD KEY `fk_Postings_Rating_posting_id` (`transaction_id`);
 
 --
 -- Indexes for table `reports`
@@ -303,7 +314,7 @@ ALTER TABLE `school`
 -- Indexes for table `transactions`
 --
 ALTER TABLE `transactions`
-  ADD PRIMARY KEY (`transactions_id`),
+  ADD PRIMARY KEY (`transaction_id`),
   ADD KEY `fk_Transactions_Postings_posting_id` (`posting_id`),
   ADD KEY `fk_Transactions_Users_email` (`buyer_email`);
 
@@ -337,13 +348,13 @@ ALTER TABLE `permissons`
 -- AUTO_INCREMENT for table `postings`
 --
 ALTER TABLE `postings`
-  MODIFY `posting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `posting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `reports`
@@ -355,7 +366,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transactions_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users_groups`
@@ -384,7 +395,7 @@ ALTER TABLE `postings`
 -- Constraints for table `ratings`
 --
 ALTER TABLE `ratings`
-  ADD CONSTRAINT `fk_Postings_Rating_posting_id` FOREIGN KEY (`posting_id`) REFERENCES `postings` (`posting_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_ratings_transactionid` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`transaction_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `reports`
