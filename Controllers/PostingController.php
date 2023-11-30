@@ -32,8 +32,6 @@ include_once 'Models/Transaction.php';
             
                 $posting->upload();
                 header("Location: ?c=posting&a=index");
-            }else if($action=='index'){
-                $this->goToIndex();
             }else if($action=='post'){
                 if(isset($_SESSION['user']) && $_SESSION['user']!='-1'){
                     $this->render($action);
@@ -63,6 +61,8 @@ include_once 'Models/Transaction.php';
                     $this->render('index');
                 }
                 
+            }else{
+                $this->goToIndex();
             }
         }
 

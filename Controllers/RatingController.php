@@ -1,7 +1,8 @@
 <?php
     include_once 'Models/Rating.php';
     include_once 'Models/Transaction.php';
-
+    include_once 'Models/User.php';
+    
     class RatingController{
 
         

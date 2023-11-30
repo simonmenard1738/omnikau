@@ -1,5 +1,5 @@
 body{
-    margin: 20px;
+    margin: 0px;
     margin-top: 80px;
     position: relative;
     font-feature-settings: 'clig' off, 'liga' off;
@@ -16,9 +16,10 @@ body{
     color: black;
     margin: 5px;
     border: 1px solid black;
-    width: 200px;
     padding-left: 20px;
     padding-right: 10px;
+    max-width: 100%;
+    min-width: 60%;
 }
 
 #fullposting{
@@ -26,10 +27,11 @@ body{
     color: black;
     margin: 5px;
     border: 1px solid black;
-    width: 80%;
     padding-left: 20px;
     padding-right: 10px;
 }
+
+
 
 #userdetails{
     background-color: white;
@@ -48,6 +50,7 @@ body{
 header{
     position: fixed;
     top:0;
+    left: 0;
     width: 100%;
     padding: 10px;
     background-color: black;
@@ -109,6 +112,41 @@ div a:visited{
 
 }
 
+#stars{
+    font-size: 40px;
+}
+
+#transactiongrid{
+    position: relative;
+    margin: 0 auto;
+}
+
+#transaction{
+    margin: 0 auto;
+    margin-bottom: 20px;
+    min-width: 200px;
+    max-width: 500px;
+    border: 2px solid black;
+    text-align: center;
+}
+
+.edituserform{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    min-width: 200px;
+    margin: 5px;
+    border: 1px solid black;
+    padding: 20px;
+
+}
+
+.edituserform button{
+
+}
+
+
 @media screen and (max-width: 800px){
     #postingGrid{
         display: grid;
@@ -120,6 +158,12 @@ div a:visited{
         align-items: center;
     
     }
+    header{
+        grid-template-columns: 40% 20% 20% 20%;
+    }
+    header a{
+        font-size: 15px;
+    }
 }
 
 @media screen and (max-width: 500px){
@@ -129,6 +173,21 @@ div a:visited{
         align-items: center;
         grid-template-columns: 1fr;
         width: 100%;
+    }
+    header{
+        position: fixed;
+        top:0;
+        width: 100%;
+        padding: 10px;
+        background-color: black;
+        color: white;
+        display: grid;
+        grid-template-columns: 40% 20% 20% 20%;
+        vertical-align: middle;
+        margin-bottom: 50px;
+    }
+    header a{
+        font-size: 12px;
     }
 
 }

@@ -80,17 +80,24 @@
                 echo $user->getAvgRating() ? " (".$user->getAvgRating()."/5)" : "No ratings yet";
             ?><p>
 
-            <p>Contact at</p>
-            <ul id="contactinfo">
+            
+            
                 <?php
+                    
                     $contact_list = $user->getContactInfo();
-                    foreach ($contact_list as $contact){
-                        echo "<li>";
-                        echo $contact->contact_type." - ".$contact->contact_info;
-                        echo "</li>";
+                    if(count($contact_list)!=0){
+                        echo "<p>Contact at</p>";
+                        echo "<ul id='contactinfo'>";
+                        foreach ($contact_list as $contact){
+                            echo "<li>";
+                            echo $contact->contact_type." - ".$contact->contact_info;
+                            echo "</li>";
+                        }
+                        echo "</ul>";
                     }
+                    
                 ?>
-            </ul>
+            
             <?php
                 if(isset($_SESSION['user'])&&$_SESSION['user']!="-1"){
                     echo "<a href='?c=posting&a=buy&i=$data->posting_id'>purchase now</button>";

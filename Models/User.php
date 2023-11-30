@@ -34,45 +34,35 @@
             }
         }
 
-        function update($data, $id){
+        function update(){
             global $conn;
-            $sql = "UPDATE user SET email =$this->email,school_name=$this->school_name,program_name=$this->program_name
-            WHERE email = $id";
+            $sql = "UPDATE user SET username='$this->username',school_name='$this->school_name',program_name='$this->program_name'
+            WHERE email = '$this->email'";
 
-            $conn->query($sql);
-
+            $res = $conn->query($sql);
+            if($res){
+                $_SESSION['user'] = $this;
+            }else{
+                $_SESSION['alert'] = "Update failed.";
+            }
             //var_dump($conn->error);
         }
 
-        function updatePassword($data){
+        function updatePassword(){
             global $conn;
-            $sql = "UPDATE user SET password = ? WHERE email = ?";
-            $stmt = $conn->prepare($sql);
-
-            // Bind parameters
-            $stmt->bind_param("ss", $data['password'], $this->email);
-            $stmt->execute();
-
-            if ($stmt->errno) {
-                //var_dump($stmt->error);
+            $sql = "UPDATE user SET password = '$this->password' WHERE email = '$this->email'";
+            $res = $conn->query($sql);
+            if($res){
+                $_SESSION['user'] = $this;
+            }else{
+                $_SESSION['alert'] = "Update failed.";
             }
-            $stmt->close();
         }
 
         function delete(){
             global $conn;
-            $sql = "DELETE FROM user WHERE email = $this->email";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("s", $this->email);
-
-            if ($stmt->execute()) {
-                $stmt->close();
-                return true;
-            } else {
-                //var_dump($conn->error);
-                $stmt->close();
-                return false;
-            }
+            $sql = "UPDATE user SET active = 0 WHERE email = '$this->email'";
+            $conn->query($sql);
         }
 
         function upload(){

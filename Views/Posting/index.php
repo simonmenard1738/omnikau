@@ -12,14 +12,7 @@
     }
 
     //var_dump($_SESSION);
-    if(isset($_SESSION['alert']) && $_SESSION['alert']!='-1'){
-        echo "<script language=\"javascript\">";
-        echo "alert('";
-        echo str_replace("'", "", $_SESSION['alert']);
-        echo "');";
-        echo "</script>";
-        $_SESSION['alert']='-1';
-    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -32,15 +25,21 @@
 </head>
 <body>
     <?php include_once "header.php"; ?>
-    <form method='get' action='?c=posting&a=index>'>
+    <div id="indexforms">
+        <form method='get' action='?c=posting&a=index>'>
 
-        <select name='sort'>
-            <option value='Price ASC'>Price low to high</option>
-            <option value='Price DESC'>Price high to low</option>
-            
-        </select>
-        <button>filter</button>
-    </form>
+            <select name='sort'>
+                <option value='Price ASC'>Price low to high</option>
+                <option value='Price DESC'>Price high to low</option>
+                
+            </select>
+            <button>filter</button>
+        </form>
+        <form method='post' action='?c=posting&a=index'>
+            <input type='text' name='search'>
+            <button>search</button>
+        </form>
+    </div>
     <div id='postingGrid'>
         <?php
         
